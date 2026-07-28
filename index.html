@@ -4,91 +4,329 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qilin Zhang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --paper: #FAF7EF;
+    --paper-edge: #F1ECDF;
+    --ink: #211D18;
+    --ink-soft: #5B5548;
+    --rule: #D8D0BC;
+    --claret: #6E2A32;
+    --claret-soft: #6E2A3212;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--paper-edge); }
+
   body {
-    max-width: 700px;
-    margin: 60px auto;
-    padding: 0 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    color: #222;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
-  h1 {
-    font-size: 1.8em;
-    margin-bottom: 0;
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 22px 0 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
   }
-  .subtitle {
-    color: #555;
-    margin-top: 4px;
-    margin-bottom: 20px;
-  }
-  .photo {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 6px;
-    float: right;
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  .links a {
-    margin-right: 14px;
-    color: #06c;
-    text-decoration: none;
-  }
-  .links a:hover {
-    text-decoration: underline;
-  }
-  hr {
+  .masthead span.dot { color: var(--claret); }
+
+  .rule {
     border: none;
-    border-top: 1px solid #ddd;
-    margin: 30px 0;
+    border-top: 1px solid var(--ink);
+    margin: 0 0 40px;
   }
-  h2 {
-    font-size: 1.2em;
-    margin-top: 30px;
+  .rule-thin {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 44px 0;
   }
-  .clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
+
+  header {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .headline h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 2.6em;
+    line-height: 1.1;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .headline h1 .zh { color: var(--claret); }
+
+  .role {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05em;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+  .role strong { font-style: normal; color: var(--ink); font-weight: 600; }
+
+  .photo-wrap { flex-shrink: 0; width: 148px; }
+  .photo-wrap img {
+    width: 148px; height: 148px; object-fit: cover;
+    border: 1px solid var(--rule); filter: grayscale(15%);
+  }
+  .photo-caption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.04em; color: var(--ink-soft);
+    text-transform: uppercase; margin-top: 8px; text-align: center;
+  }
+
+  .refs {
+    list-style: none; margin: 28px 0 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 6px 22px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+  }
+  .refs li a {
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--rule); padding-bottom: 1px;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .refs li a:hover { color: var(--claret); border-color: var(--claret); }
+  .refs li .idx { color: var(--claret); margin-right: 5px; }
+
+  .tags { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags .label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft);
+    display: flex; align-items: center; margin-right: 4px;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+    padding: 4px 10px; border: 1px solid var(--rule);
+    color: var(--ink-soft); background: var(--claret-soft); border-radius: 2px;
+  }
+
+  section h2 {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--claret);
+    margin: 0 0 18px; display: flex; align-items: baseline; gap: 10px;
+  }
+  section h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); align-self: center; }
+  section h2 .count { color: var(--ink-soft); font-weight: 400; }
+
+  section p { margin: 0 0 18px; color: var(--ink); }
+  section p:first-of-type::first-line { font-family: 'Source Serif 4', Georgia, serif; }
+
+  /* Publications */
+  .pub-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--claret);
+    margin: 30px 0 10px;
+  }
+  .pub-year:first-child { margin-top: 0; }
+  .pub-list { list-style: none; margin: 0; padding: 0; }
+  .pub-list li {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 13px;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .pub-list li .idx {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    width: 22px;
+  }
+  .pub-list li .entry a {
+    color: var(--claret);
+    text-decoration: none;
+    border-bottom: 1px solid var(--claret);
+  }
+  .pub-list li .entry a:hover { opacity: 0.7; }
+
+  footer {
+    margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--rule);
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft);
+    display: flex; justify-content: space-between;
+  }
+
+  @media (max-width: 560px) {
+    header { flex-direction: column-reverse; }
+    .photo-wrap { width: 110px; }
+    .photo-wrap img { width: 110px; height: 110px; }
+    .headline h1 { font-size: 2em; }
+    .pub-list li { font-size: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
   }
 </style>
 </head>
 <body>
 
-<div class="clearfix">
-  <img src="photo.jpg" alt="Photo of Qilin Zhang" class="photo">
-
-  <h1>Qilin Zhang / 张麒麟</h1>
-  <div class="subtitle">
-    Associate Professor (2023–), Southwest University, China<br>
-    Visiting Researcher (2026–2027), Amsterdam University Medical Center (AUMC), Netherlands
-  </div>
-
-  <div class="links">
-    <a href="mailto:zhang70sw@swu.edu.cn">Email</a>
-    <a href="https://www.linkedin.com/in/qilin-zhang-25b26183/">LinkedIn</a>
-    <a href="https://orcid.org/0000-0001-9761-5463">ORCID</a>
-    <a href="https://scholar.google.com/citations?user=QEryaysAAAAJ&hl=zh-TW&oi=ao">Google Scholar</a>
-  </div>
+<div class="masthead">
+  <span>Qilin Zhang <span class="dot">·</span> Personal Page</span>
 </div>
+<hr class="rule">
 
-<p>
-Research interests: citation norms, library theory, reading promotion.
-</p>
+<header>
+  <div class="headline">
+    <h1>Qilin Zhang <span class="zh">/ 张麒麟</span></h1>
+    <p class="role"><strong>Associate Professor</strong> (2023–), Southwest University, China</p>
+    <p class="role">Visiting Researcher (2026–2027), Amsterdam University Medical Center (AUMC), Netherlands</p>
 
-<hr>
+    <ul class="refs">
+      <li><span class="idx">[1]</span><a href="mailto:zhang70sw@swu.edu.cn">Email</a></li>
+      <li><span class="idx">[2]</span><a href="https://www.linkedin.com/in/qilin-zhang-25b26183/">LinkedIn</a></li>
+      <li><span class="idx">[3]</span><a href="https://orcid.org/0000-0001-9761-5463">ORCID</a></li>
+      <li><span class="idx">[4]</span><a href="https://scholar.google.com/citations?user=QEryaysAAAAJ&hl=zh-TW&oi=ao">Google Scholar</a></li>
+    </ul>
 
-<h2>About</h2>
+    <div class="tags">
+      <span class="label">Research —</span>
+      <span class="tag">citation norms</span>
+      <span class="tag">library theory</span>
+      <span class="tag">reading promotion</span>
+    </div>
+  </div>
 
-<p>
-After earning his bachelor's and master's degrees in Library Science from Nanjing University, Qilin joined Southwest University as a librarian in 2015, working in his hometown of Chongqing and researching reading-promotion policies across different countries. Three years later, he decided to pursue a doctoral degree, broadening and deepening his research interests. Through a historical study of citation norms from a comparative China–West perspective, Qilin completed his PhD (2021), also at Nanjing University, and subsequently became a faculty member, being promoted to Associate Professor in 2023. In 2026, he began a one-year visiting research position at Amsterdam UMC in the Netherlands, focusing on questionable citation practices.
-</p>
+  <div class="photo-wrap">
+    <img src="photo.jpg" alt="Photo of Qilin Zhang">
+    <div class="photo-caption">Fig. 1 — Q. Zhang</div>
+  </div>
+</header>
 
-<p>
-To date, Qilin has published 32 first-authored journal articles (all in Chinese), 18 of which are indexed in CSSCI (Chinese Social Sciences Citation Index). He has also led several research projects.
-</p>
+<hr class="rule-thin">
+
+<section>
+  <h2>About me</h2>
+  <p>
+  After earning his bachelor's and master's degrees in Library Science from Nanjing University, Qilin joined Southwest University as a librarian in 2015, working in his hometown of Chongqing and researching reading-promotion policies across different countries. Three years later, he decided to pursue a doctoral degree, broadening and deepening his research interests. Through a historical study of citation norms from a comparative China–West perspective, Qilin completed his PhD (2021), also at Nanjing University, and subsequently became a faculty member, being promoted to Associate Professor in 2023. In 2026, he began a one-year visiting research position at Amsterdam UMC in the Netherlands, focusing on questionable citation practices.
+  </p>
+  <p>
+  To date, Qilin has published 30 first-authored journal articles (most in Chinese), and has also led several research projects, including one funded by China National Social Science Fund..
+  </p>
+</section>
+
+<hr class="rule-thin">
+
+<section>
+  <h2>Publications <span class="count">(33)</span></h2>
+
+  <div class="pub-year">2026</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q., Li, Y., &amp; Bouter, L. (2026). How to categorize citation irregularities: A proposal based on an exploration of the literature. <em>Accountability in Research.</em> <a href="https://doi.org/10.1080/08989621.2026.2654564">https://doi.org/10.1080/08989621.2026.2654564</a></span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2026). The Ten Years of National Reading Promotion Legislation: Review and Suggestions. <em>Library Journal</em> 图书馆杂志, 45(1), 20–28.</span></li>
+  </ul>
+
+  <div class="pub-year">2025</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q., &amp; Wei, W. J. (2025). Research on the Transformation Path for Community-Oriented Grassroots Libraries. <em>Journal of the National Library of China</em> 国家图书馆学刊, 34(2), 46–55.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2025). Citation Misconduct: Research Review and Prospect. <em>Information Research</em> 情报探索, 7, 100–108.</span></li>
+    <li><span class="idx">[3]</span><span class="entry">Zhang, Q. (2025). Transplantation and Localization: The Transnational Evolution of the Modern Concept of "Integration of Library and Museum". <em>Journal of Information Management</em> 信息与管理研究, 10(4), 1–10.</span></li>
+    <li><span class="idx">[4]</span><span class="entry">Zhang, Q., &amp; Wei, W. J. (2025). The Transformation and Service Innovation of European Public Libraries from the Perspective of Digital Inclusion: A Case Study of Public Libraries 2030. <em>Library Science Research &amp; Work</em> 图书馆研究与工作, 12, 44–51.</span></li>
+  </ul>
+
+  <div class="pub-year">2023</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2023). The Westernization of the Norms of Citation Description in the Republic of China Period and Its Enlightenment. <em>Library Journal</em> 图书馆杂志, 42(2), 69–74.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2023). Practice and Enlightenment of the Education Projects on Science and Technology Ethics Led by Foreign Governments. <em>Science and Technology Talents of China</em> 中国科技人才, 5, 62–69.</span></li>
+    <li><span class="idx">[3]</span><span class="entry">Zhang, Q. (2023). The Research on the Works of Chinese Library Science. In H. Xie (Ed.), <em>A Guide to Research on the History of Chinese Libraries</em> 中国图书馆史研究导引 (pp. 215–243). Nanjing University Press.</span></li>
+  </ul>
+
+  <div class="pub-year">2022</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2022). Historical Evolution of the Image of Libraries and Its Construction in the Metaverse. <em>Journal of the National Library of China</em> 国家图书馆学刊, 31(4), 50–57.</span></li>
+  </ul>
+
+  <div class="pub-year">2021</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2021). Practice and Channels of Information Resource Procurement. In J. Y. Ye (Ed.), <em>Resource Information Development</em> 信息资源建设 (pp. 119–157). Science Press.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2021). A Study on the Evolution of Citation Norms and Its Mechanism (Doctoral dissertation). Nanjing University.</span></li>
+  </ul>
+
+  <div class="pub-year">2020</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q., &amp; Jiang, L. (2020). An Analysis on the Long-Term Motivation Mechanism for Children's Reading Promotion in Japan. <em>Library Tribune</em> 图书馆论坛, 40(3), 147–155.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2020). A Comparative Research on the Annotation Specifications Between Ancient China and Ancient West. <em>Journal of Library Science Society of Sichuan</em> 四川图书馆学报, 1, 73–77.</span></li>
+  </ul>
+
+  <div class="pub-year">2019</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q., &amp; Ye, J. Y. (2019). On the Challenge to Status and the Reaffirmation to Value of Contemporary Libraries: Taking the Rise and Limitations of the Pay-for-Knowledge as the Reference. <em>Library and Information Service</em> 图书情报工作, 63(14), 5–12.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2019). An Exploratory Research on Contemporary College Students' Reading Experience in Childhood. <em>Library Tribune</em> 图书馆论坛, 39(1), 131–137.</span></li>
+    <li><span class="idx">[3]</span><span class="entry">Zhang, Q. (2019). Reading Promotion in Colleges Based on the Concept of College-Specific: One College One Book and One City One Book. <em>Library Journal</em> 图书馆杂志, 38(4), 19–22.</span></li>
+    <li><span class="idx">[4]</span><span class="entry">Zhang, Q. (2019). Enlightenment of Private Copyright Rules on Knowledge Payment Platform to Libraries. <em>Library Development</em> 图书馆建设, 3, 40–45.</span></li>
+    <li><span class="idx">[5]</span><span class="entry">Zhang, Q. (2019). A Comparative Study on Foreign Reference Styles. <em>The Library Journal of Shandong</em> 山东图书馆学刊, 5, 102–107.</span></li>
+  </ul>
+
+  <div class="pub-year">2018</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2018). The Construction of a Benign Copyright Ecosystem in the Knowledge Payment Industry. <em>Science Technology and Publication</em> 科技与出版, 6, 27–31.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2018). Research on Book Recommendation Mechanism Based on Literature Content. <em>Research on Library Science</em> 图书馆学研究, 1, 78–81.</span></li>
+    <li><span class="idx">[3]</span><span class="entry">Zhang, Q. (2018). The Fundamental Basis of Reading Ability Is How to Read: A Reading Report on <em>The Power of Reading</em> by Takashi Saito and <em>Reading Capacity</em> by Nie Zhenning. <em>The Library Journal of Shandong</em> 山东图书馆学刊, 1, 97–99.</span></li>
+  </ul>
+
+  <div class="pub-year">2017</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2017). Practice and Reflection on the Operation of Student Teams for Reading Promotion in University Libraries: A Case Study of the Reading Promotion Workshop at Southwest University Library. <em>Research on Library Science</em> 图书馆学研究, 24, 70–73.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2017). Copyright Protection Strategies in the Context of National Reading Promotion Legislation. <em>Science Technology and Publication</em> 科技与出版, 12, 25–29.</span></li>
+  </ul>
+
+  <div class="pub-year">2016</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2016). Comparison of Legislation on Campus Reading Abroad and Its Experience Implications. <em>Library Work and Study</em> 图书馆工作与研究, 8, 110–113.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2016). The Beginning to the End of Wu Mi's Book Donation to Southwest Normal University. <em>Book House</em> 书屋, 5, 18–20.</span></li>
+  </ul>
+
+  <div class="pub-year">2015</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2015). Research on the Influence of Reading Legislation Abroad on Reading Promotion. <em>Library and Information Service</em> 图书情报工作, 59(23), 11–16.</span></li>
+  </ul>
+
+  <div class="pub-year">2014</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2014). Reading Legislation and Reading Promotion Practice of Russia. <em>New Century Library</em> 新世纪图书馆, 4, 20–22.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q. (2014). The Origin, Organization, and Function of Chinese Modern Scholars' Essays on the Study of Letters. <em>The Library Journal of Shandong</em> 山东图书馆学刊, 2, 116–117.</span></li>
+  </ul>
+
+  <div class="pub-year">2013</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2013). Cultural Connotation and Knowledge Dissemination Value of Commercial Internet Book Review. <em>Library Journal</em> 图书馆杂志, 32(11), 34–37.</span></li>
+    <li><span class="idx">[2]</span><span class="entry">Zhang, Q., &amp; Chen, Y. (2013). To Compare the Service Modes of Digital Resources in Library. <em>Library Tribune</em> 图书馆论坛, 33(4), 28–31.</span></li>
+    <li><span class="idx">[3]</span><span class="entry">Zhang, Q. (2013). A Review of Book Review Studies in the Past Five Years (2008–2012). <em>The Library Journal of Shandong</em> 山东图书馆学刊, 4, 28–32.</span></li>
+  </ul>
+
+  <div class="pub-year">2011</div>
+  <ul class="pub-list">
+    <li><span class="idx">[1]</span><span class="entry">Zhang, Q. (2011). Overview of Chongqing's Old-Book Industry and Its Contemporary Old-Book Market. <em>Library Journal</em> 图书馆杂志, 30(10), 108–111.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <span>© 2026 Qilin Zhang</span>
+  <span>Last updated July 2026</span>
+</footer>
 
 </body>
 </html>
